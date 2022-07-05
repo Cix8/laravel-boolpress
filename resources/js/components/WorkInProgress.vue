@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h2>WORK IN PROGRESS</h2>
   </div>
 </template>
@@ -10,6 +10,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: brown;
+    }
 </style>

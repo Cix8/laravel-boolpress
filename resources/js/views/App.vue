@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="client_side">
     <h1>Client Page</h1>
     <WorkInProgress />
   </div>
@@ -17,5 +17,4 @@ export default {
 </script>
 
 <style>
-
 </style>
