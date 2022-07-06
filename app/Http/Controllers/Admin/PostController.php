@@ -57,7 +57,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $selected_post = Post::findOrfail($id);
+        $selected_post = Post::findOrFail($id);
         return view('admin.posts.show', compact('selected_post'));
     }
 
@@ -69,7 +69,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $selected_post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('selected_post'));
     }
 
     /**
@@ -81,7 +82,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate($this->getValidationRules());
+
+        $current_data = $request->all();
+        $post_to_update = Post::findOrFail($id);
+        $post_to_update->fill($current_data);
+        $post_to_update->slug = $this->generatePostSlugFromTitle($post_to_update->title);
+        $post_to_update->save();
+
+        return redirect()->route('admin.posts.show', ['post' => $post_to_update->id]);
     }
 
     /**
