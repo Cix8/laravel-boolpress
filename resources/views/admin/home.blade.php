@@ -8,4 +8,13 @@
 
         <button type="submit">Logout</button>
     </form>
+
+    <ul>
+        <li>
+            <a href="{{ route('admin.posts.index') }}">Visualizza tutti i Post</a>
+        </li>
+        <li>
+            <a href="{{ route('admin.posts.create') }}">Crea un nuovo Post</a>
+        </li>
+    </ul>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -26,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -37,7 +38,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->getValidationRules());
+
+        $current_data = $request->all();
+        $new_post = new Post();
+        $new_post->fill($current_data);
+        $new_post->slug = $this->generatePostSlugFromTitle($new_post->title);
+        $new_post->save();
+
+        return redirect()->route('admin.posts.show', ['post' => $new_post->id]);
     }
 
     /**
@@ -48,7 +57,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $selected_post = Post::findOrfail($id);
+        return view('admin.posts.show', compact('selected_post'));
     }
 
     /**
@@ -83,5 +93,26 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function generatePostSlugFromTitle($title) {
+        $original_slug = Str::slug($title, '-');
+        $result_slug = $original_slug;
+        $count = 1;
+        $post_found = Post::where('slug', '=', $result_slug)->first();
+        while ($post_found) {
+            $result_slug = $original_slug . '-' . $count;
+            $post_found = Post::where('slug', '=', $result_slug)->first();
+            $count++;
+        }
+
+        return $result_slug;
+    }
+
+    private function getValidationRules() {
+        return [
+            'title' => 'required|max:255',
+            'text' => 'required|max:30000'
+        ];
     }
 }
