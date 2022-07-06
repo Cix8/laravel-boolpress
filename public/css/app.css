@@ -10953,3 +10953,16 @@ a.text-dark:focus {
   }
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
