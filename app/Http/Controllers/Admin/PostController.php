@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -43,7 +42,7 @@ class PostController extends Controller
         $current_data = $request->all();
         $new_post = new Post();
         $new_post->fill($current_data);
-        $new_post->slug = $this->generatePostSlugFromTitle($new_post->title);
+        $new_post->slug = Post::generatePostSlugFromTitle($new_post->title);
         $new_post->save();
 
         return redirect()->route('admin.posts.show', ['post' => $new_post->id]);
@@ -86,9 +85,8 @@ class PostController extends Controller
 
         $current_data = $request->all();
         $post_to_update = Post::findOrFail($id);
-        $post_to_update->fill($current_data);
-        $post_to_update->slug = $this->generatePostSlugFromTitle($post_to_update->title);
-        $post_to_update->save();
+        $current_data['slug'] = Post::generatePostSlugFromTitle($post_to_update->title);
+        $post_to_update->update($current_data);
 
         return redirect()->route('admin.posts.show', ['post' => $post_to_update->id]);
     }
@@ -104,20 +102,6 @@ class PostController extends Controller
         $post_to_delete = Post::findOrFail($id);
         $post_to_delete->delete();
         return redirect()->route('admin.posts.index');
-    }
-
-    private function generatePostSlugFromTitle($title) {
-        $original_slug = Str::slug($title, '-');
-        $result_slug = $original_slug;
-        $count = 1;
-        $post_found = Post::where('slug', '=', $result_slug)->first();
-        while ($post_found) {
-            $result_slug = $original_slug . '-' . $count;
-            $post_found = Post::where('slug', '=', $result_slug)->first();
-            $count++;
-        }
-
-        return $result_slug;
     }
 
     private function getValidationRules() {
