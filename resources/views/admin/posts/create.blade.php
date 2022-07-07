@@ -22,6 +22,14 @@
         <label for="text">Text</label>
         <input type="text" name="text" id="text" value="{{ old('text') }}">
 
+        <label for="category_id">Category</label>
+        <select name="category_id" id="category_id">
+            <option value="">None</option>
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+
         <button type="submit">Crea Post</button>
     </form>
 @endsection
