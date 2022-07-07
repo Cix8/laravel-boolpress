@@ -26,7 +26,9 @@
         <select name="category_id" id="category_id">
             <option value="">None</option>
             @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}"
+                    {{ old('category_id') && old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}</option>
             @endforeach
         </select>
 

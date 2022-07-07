@@ -12,8 +12,13 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'text'
+        'text',
+        'category_id'
     ];
+
+    public function category() {
+        return $this->belongsTo('App\Category');
+    }
 
     public static function generatePostSlugFromTitle($title) {
         $original_slug = Str::slug($title, '-');
@@ -27,9 +32,5 @@ class Post extends Model
         }
 
         return $result_slug;
-    }
-
-    public function category() {
-        return $this->belongsTo('App\Category');
     }
 }
