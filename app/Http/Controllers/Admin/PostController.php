@@ -117,7 +117,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post_to_delete = Post::findOrFail($id);
-        $post_to_delete->slug = '';
+        $post_to_delete->slug .= $post_to_delete->id;
         $post_to_delete->save();
         $post_to_delete->tags()->sync([]);
         $post_to_delete->delete();
