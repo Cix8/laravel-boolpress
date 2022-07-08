@@ -14,15 +14,11 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Dubstep',
-            'Easy Listening',
-            'Electro Pop',
-            'Folk',
-            'Funk',
-            'House',
-            'Rap',
-            'Rock',
-            'Disco'
+            'primi piatti',
+            'secondi piatti',
+            'antipasti',
+            'contorni',
+            'dessert'
         ];
 
         foreach ($categories as $category) {
