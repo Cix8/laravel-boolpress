@@ -79,7 +79,8 @@ class PostController extends Controller
     {
         $selected_post = Post::findOrFail($id);
         $categories = Category::all();
-        return view('admin.posts.edit', compact('selected_post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('selected_post', 'categories', 'tags'));
     }
 
     /**
@@ -98,6 +99,12 @@ class PostController extends Controller
         $current_data['slug'] = Post::generatePostSlugFromTitle($post_to_update->title);
         $post_to_update->update($current_data);
 
+        if (isset($current_data['tags'])) {
+            $post_to_update->tags()->sync($current_data['tags']);
+        } else {
+            $post_to_update->tags()->sync([]);
+        }
+
         return redirect()->route('admin.posts.show', ['post' => $post_to_update->id]);
     }
 
@@ -112,6 +119,7 @@ class PostController extends Controller
         $post_to_delete = Post::findOrFail($id);
         $post_to_delete->slug = '';
         $post_to_delete->save();
+        $post_to_delete->tags()->sync([]);
         $post_to_delete->delete();
         return redirect()->route('admin.posts.index');
     }
