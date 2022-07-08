@@ -16,5 +16,8 @@
         <li>
             <a href="{{ route('admin.posts.create') }}">Crea un nuovo Post</a>
         </li>
+        <li>
+            <a href="{{ route('admin.categories.index') }}">Visualizza tutte le categorie</a>
+        </li>
     </ul>
 @endsection
