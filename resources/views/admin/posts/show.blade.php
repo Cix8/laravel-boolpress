@@ -28,7 +28,9 @@
                 @csrf
                 @method('DELETE')
 
-                <button type="submit">Elimina Post</button>
+                <a href="{{ route('admin.posts.edit', ['post' => $selected_post->id]) }}"
+                    class="btn btn-primary">Modifica</a>
+                <button type="submit" class="btn btn-danger">Elimina Post</button>
             </form>
         </li>
     </ul>

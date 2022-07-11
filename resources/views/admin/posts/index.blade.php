@@ -1,15 +1,20 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <ol>
+    <ul class="d-flex flex-wrap justify-content-center">
         @foreach ($posts as $post)
             <li>
                 <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}">
-                    <h3>{{ $post->title }}</h3>
-                    <p>{{ $post->text }}</p>
-                    <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}">Modifica</a>
+                    <div class="card m-2 p-2" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <p class="card-text text-secondary" style="max-height: 120px; overflow-y: scroll;">{{ $post->text }}</p>
+                            <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}"
+                                class="btn btn-primary mt-3">Modifica</a>
+                        </div>
+                    </div>
                 </a>
             </li>
         @endforeach
-    </ol>
+    </ul>
 @endsection
