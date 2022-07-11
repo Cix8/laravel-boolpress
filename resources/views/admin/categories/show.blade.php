@@ -6,9 +6,9 @@
     <ol>
         @foreach ($posts as $post)
             <li>
-                <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}">
+                <a class="text-dark" href="{{ route('admin.posts.show', ['post' => $post->id]) }}">
                     <h3>{{ $post->title }}</h3>
-                    <p>{{ $post->text }}</p>
+                    <p class="text-dark">{{ $post->text }}</p>
                     <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
