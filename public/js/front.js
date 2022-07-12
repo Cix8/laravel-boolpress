@@ -1912,18 +1912,27 @@ __webpack_require__.r(__webpack_exports__);
   name: "ApiPost",
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      currentPage: 1,
+      lastPage: 1
     };
   },
   created: function created() {
-    this.getPosts();
+    this.getPosts(1);
   },
   methods: {
-    getPosts: function getPosts() {
+    getPosts: function getPosts(selectedPage) {
       var _this = this;
 
-      axios.get("api/posts").then(function (resp) {
-        _this.posts = resp.data.results;
+      axios.get("api/posts", {
+        params: {
+          page: selectedPage
+        }
+      }).then(function (resp) {
+        console.log(resp);
+        _this.posts = resp.data.results.data;
+        _this.currentPage = resp.data.results.current_page;
+        _this.lastPage = resp.data.results.last_page;
       });
     }
   }
@@ -1966,15 +1975,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("ul", {
-    staticClass: "d-flex flex-wrap justify-content-center"
+  return _c("div", [_c("ul", {
+    staticClass: "d-flex flex-wrap justify-content-center pt-5"
   }, _vm._l(_vm.posts, function (post, index) {
     return _c("li", {
       key: index
     }, [_c("div", {
       staticClass: "card m-2 p-2",
       staticStyle: {
-        width: "18rem"
+        width: "18rem",
+        "min-height": "250px"
       }
     }, [_c("div", {
       staticClass: "card-body"
@@ -1986,8 +1996,62 @@ var render = function render() {
         "max-height": "120px",
         "overflow-y": "scroll"
       }
-    }, [_vm._v("\r\n            " + _vm._s(post.text) + "\r\n          ")])])])]);
-  }), 0);
+    }, [_vm._v("\r\n              " + _vm._s(post.text) + "\r\n            ")])])])]);
+  }), 0), _vm._v(" "), _c("nav", {
+    attrs: {
+      "aria-label": "Page navigation example"
+    }
+  }, [_c("ul", {
+    staticClass: "pagination justify-content-center"
+  }, [_c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === 1
+    }
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage - 1);
+      }
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _vm._l(_vm.lastPage, function (page) {
+    return _c("li", {
+      key: page,
+      staticClass: "page-item",
+      "class": {
+        active: _vm.currentPage === page
+      }
+    }, [_c("a", {
+      staticClass: "page-link",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.getPosts(page);
+        }
+      }
+    }, [_vm._v(_vm._s(page))])]);
+  }), _vm._v(" "), _c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === _vm.lastPage
+    }
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage + 1);
+      }
+    }
+  }, [_vm._v("Next")])])], 2)])]);
 };
 
 var staticRenderFns = [];
