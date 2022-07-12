@@ -1,20 +1,21 @@
 <template>
   <div class="client_side">
     <h1>Client Page</h1>
-    <WorkInProgress />
+    <ApiPosts />
   </div>
 </template>
 
 <script>
-import WorkInProgress from '../components/WorkInProgress.vue';
+import ApiPosts from '../components/ApiPosts.vue';
 
 export default {
     name: 'App',
     components: {
-      WorkInProgress
+      ApiPosts
     }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "../../sass/app";
 </style>
