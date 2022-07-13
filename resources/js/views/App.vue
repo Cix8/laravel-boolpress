@@ -1,14 +1,22 @@
 <template>
   <div class="client_side">
-    <h1>Client Page</h1>
+    <NavBar />
+    <AppJumbo />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import NavBar from "../components/NavBar.vue";
+import AppJumbo from "../components/AppJumbo.vue";
+
 export default {
-    name: 'App',
-}
+  name: "App",
+  components: {
+    AppJumbo,
+    NavBar,
+  },
+};
 </script>
 
 <style lang="scss">
