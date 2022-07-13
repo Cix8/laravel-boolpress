@@ -2,7 +2,7 @@
   <div>
     <ul class="d-flex flex-wrap justify-content-center pt-5">
       <li v-for="(post, index) in posts" :key="index">
-        <div class="card m-2 p-2" style="width: 18rem; min-height: 250px">
+        <div class="card m-2 p-2" style="width: 18rem; min-height: 280px">
           <div class="card-body">
             <h5 class="card-title text-primary">{{ post.title }}</h5>
             <p

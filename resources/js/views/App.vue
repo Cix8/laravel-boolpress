@@ -1,18 +1,13 @@
 <template>
   <div class="client_side">
     <h1>Client Page</h1>
-    <ApiPosts />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ApiPosts from '../components/ApiPosts.vue';
-
 export default {
     name: 'App',
-    components: {
-      ApiPosts
-    }
 }
 </script>
 
