@@ -51,7 +51,7 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $selected_post = Post::where('slug', '=', $slug)->first();
+        $selected_post = Post::where('slug', '=', $slug)->with(['category', 'tags'])->first();
         if ($selected_post) {
             return response()->json([
                 'success' => true,
