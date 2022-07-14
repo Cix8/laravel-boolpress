@@ -12,8 +12,13 @@
           <h5>{{ getCategoryName }}</h5>
         </div>
         <div class="card-body" v-if="selectedPost.tags.length != 0">
-            <strong>Tags: </strong>
-          <a v-for="(tag, index) in selectedPost.tags" :key="index">{{ tag.name }}</a>
+          <strong>Tags: </strong>
+          <router-link
+            v-for="(tag, index) in selectedPost.tags"
+            :key="index"
+            :to="{ name: 'single-tag', params: { slug: tag.slug } }"
+            >{{ tag.name }}</router-link
+          >
         </div>
       </div>
     </template>
@@ -41,7 +46,7 @@ export default {
       return this.selectedPost.category
         ? this.selectedPost.category.name
         : "Nessuna categoria";
-    }
+    },
   },
   methods: {
     getSinglePost() {
