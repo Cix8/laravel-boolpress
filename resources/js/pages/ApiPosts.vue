@@ -12,16 +12,31 @@
               {{ post.text }}
             </p>
           </div>
+          <div class="card-body">
+            <router-link
+              :to="{ name: 'single-post', params: { slug: post.slug } }"
+              >Leggi il post</router-link
+            >
+          </div>
         </div>
       </li>
     </ul>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item" :class="{ disabled: currentPage === 1 }"><a @click="getPosts(currentPage - 1)" class="page-link">Previous</a></li>
-        <li v-for="page in lastPage" :key="page" class="page-item" :class="{ active: currentPage === page }">
-            <a @click="getPosts(page)" class="page-link">{{ page }}</a>
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a @click="getPosts(currentPage - 1)" class="page-link">Previous</a>
         </li>
-        <li class="page-item" :class="{ disabled: currentPage === lastPage }"><a @click="getPosts(currentPage + 1)" class="page-link">Next</a></li>
+        <li
+          v-for="page in lastPage"
+          :key="page"
+          class="page-item"
+          :class="{ active: currentPage === page }"
+        >
+          <a @click="getPosts(page)" class="page-link">{{ page }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === lastPage }">
+          <a @click="getPosts(currentPage + 1)" class="page-link">Next</a>
+        </li>
       </ul>
     </nav>
   </div>

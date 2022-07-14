@@ -49,9 +49,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $selected_post = Post::where('slug', '=', $slug)->first();
+        if ($selected_post) {
+            return response()->json([
+                'success' => true,
+                'results' => $selected_post
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'error' => 'Non ci sono post che corrispondono alla tua ricerca'
+        ]);
     }
 
     /**
