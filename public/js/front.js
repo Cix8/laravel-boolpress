@@ -2443,7 +2443,13 @@ var render = function render() {
     staticClass: "card-text"
   }, [_vm._v("\r\n            " + _vm._s(_vm.selectedPost.text) + "\r\n          ")])]), _vm._v(" "), _c("div", {
     staticClass: "card-body"
-  }, [_c("h5", [_vm._v(_vm._s(_vm.getCategoryName))])])])] : [_c("h2", [_vm._v("Loading")])]], 2);
+  }, [_c("h5", [_vm._v(_vm._s(_vm.getCategoryName))])]), _vm._v(" "), _vm.selectedPost.tags.length != 0 ? _c("div", {
+    staticClass: "card-body"
+  }, [_c("strong", [_vm._v("Tags: ")]), _vm._v(" "), _vm._l(_vm.selectedPost.tags, function (tag, index) {
+    return _c("a", {
+      key: index
+    }, [_vm._v(_vm._s(tag.name))]);
+  })], 2) : _vm._e()])] : [_c("h2", [_vm._v("Loading")])]], 2);
 };
 
 var staticRenderFns = [];
