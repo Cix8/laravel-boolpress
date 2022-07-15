@@ -2041,7 +2041,6 @@ __webpack_require__.r(__webpack_exports__);
       name: "",
       email: "",
       request: "",
-      badgeTimer: null,
       success: false
     };
   },

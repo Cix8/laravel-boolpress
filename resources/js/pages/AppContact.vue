@@ -59,7 +59,6 @@ export default {
       name: "",
       email: "",
       request: "",
-      badgeTimer: null,
       success: false,
     };
   },
