@@ -13,18 +13,22 @@ class Post extends Model
     protected $fillable = [
         'title',
         'text',
-        'category_id'
+        'category_id',
+        'cover'
     ];
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo('App\Category');
     }
 
-    public function tags() {
+    public function tags()
+    {
         return $this->belongsToMany('App\Tag');
     }
 
-    public static function generatePostSlugFromTitle($title) {
+    public static function generatePostSlugFromTitle($title)
+    {
         $original_slug = Str::slug($title, '-');
         $result_slug = $original_slug;
         $count = 1;

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class PostController extends Controller
 {
@@ -44,6 +46,12 @@ class PostController extends Controller
         $request->validate($this->getValidationRules());
 
         $current_data = $request->all();
+
+        if (isset($current_data['image'])) {
+            $image_path = Storage::put('post_covers', $current_data['image']);
+            $current_data['cover'] = $image_path;
+        }
+
         $new_post = new Post();
         $new_post->fill($current_data);
         $new_post->slug = Post::generatePostSlugFromTitle($new_post->title);
@@ -124,12 +132,14 @@ class PostController extends Controller
         return redirect()->route('admin.posts.index');
     }
 
-    private function getValidationRules() {
+    private function getValidationRules()
+    {
         return [
             'title' => 'required|max:255',
             'text' => 'required|max:30000',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'image' => 'nullable|max:400'
         ];
     }
 }
