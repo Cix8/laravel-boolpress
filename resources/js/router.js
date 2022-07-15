@@ -9,6 +9,7 @@ import AppInfo from './pages/AppInfo.vue';
 import SinglePost from './pages/SinglePost.vue';
 import ApiTags from './pages/ApiTags.vue';
 import SingleTag from './pages/SingleTag.vue';
+import AppContact from './pages/AppContact.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = new Router({
@@ -18,8 +19,9 @@ const router = new Router({
         { path: '/posts', name: 'posts', component: ApiPosts },
         { path: '/info', name: 'info', component: AppInfo },
         { path: '/posts/:slug', name: 'single-post', component: SinglePost },
-        {path: '/tags', name: 'tags', component: ApiTags},
+        { path: '/tags', name: 'tags', component: ApiTags },
         { path: '/tags/:slug', name: 'single-tag', component: SingleTag },
+        { path: '/contacts', name: 'contacts', component: AppContact },
         { path: '/*', name: 'not-found', component: NotFound }
     ]
 })
