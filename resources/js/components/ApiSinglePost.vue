@@ -1,6 +1,7 @@
 <template>
   <div class="card m-2 p-2" style="width: 18rem; min-height: 280px">
     <div class="card-body">
+      <img v-if="post.cover" class="card-img-top" :src="'storage/' + post.cover" :alt="post.title">
       <h5 class="card-title text-primary">{{ post.title }}</h5>
       <p
         class="card-text text-secondary"

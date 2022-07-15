@@ -2198,7 +2198,13 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "card-body"
-  }, [_c("h5", {
+  }, [_vm.post.cover ? _c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: "storage/" + _vm.post.cover,
+      alt: _vm.post.title
+    }
+  }) : _vm._e(), _vm._v(" "), _c("h5", {
     staticClass: "card-title text-primary"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
     staticClass: "card-text text-secondary",
@@ -2600,8 +2606,14 @@ var render = function render() {
   return _c("div", {
     staticClass: "container"
   }, [_vm.selectedPost ? [_c("div", {
-    staticClass: "card"
-  }, [_c("div", {
+    staticClass: "card my-5"
+  }, [_vm.selectedPost.cover ? _c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: "../storage/" + _vm.selectedPost.cover,
+      alt: _vm.selectedPost.title
+    }
+  }) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("h4", {
     staticClass: "card-title"

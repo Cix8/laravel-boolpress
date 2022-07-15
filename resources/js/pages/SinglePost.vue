@@ -1,7 +1,13 @@
 <template>
   <div class="container">
     <template v-if="selectedPost">
-      <div class="card">
+      <div class="card my-5">
+        <img
+          v-if="selectedPost.cover"
+          class="card-img-top"
+          :src="'../storage/' + selectedPost.cover"
+          :alt="selectedPost.title"
+        />
         <div class="card-body">
           <h4 class="card-title">{{ selectedPost.title }}</h4>
           <p class="card-text">
