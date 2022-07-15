@@ -104,6 +104,17 @@ class PostController extends Controller
 
         $current_data = $request->all();
         $post_to_update = Post::findOrFail($id);
+
+        if (isset($current_data['image'])) {
+
+            if ($post_to_update->cover) {
+                Storage::delete($post_to_update->cover);
+            }
+
+            $image_path = Storage::put('post_covers', $current_data['image']);
+            $current_data['cover'] = $image_path;
+        }
+
         $current_data['slug'] = Post::generatePostSlugFromTitle($post_to_update->title);
         $post_to_update->update($current_data);
 

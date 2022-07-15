@@ -2,6 +2,11 @@
 
 @section('content')
     <ul>
+        @if ($selected_post->cover)
+            <li>
+                <img src="{{ asset('storage/' . $selected_post->cover) }}" alt="{{ $selected_post->title }}">
+            </li>
+        @endif
         <li>
             <h2>{{ $selected_post->title }}</h2>
         </li>

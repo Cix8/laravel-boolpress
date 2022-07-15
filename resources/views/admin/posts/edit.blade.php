@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.posts.update', ['post' => $selected_post->id]) }}" method="POST">
+    <form action="{{ route('admin.posts.update', ['post' => $selected_post->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -50,6 +50,18 @@
                     <label for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                 </div>
             @endforeach
+        </div>
+
+        <div>
+            @if ($selected_post->cover)
+                <div>
+                    <h6>Immagine attuale</h6>
+                    <img src="{{ asset('storage/' . $selected_post->cover) }}" alt="">
+                </div>
+            @endif
+
+            <label for="image">Modifica immagine di copertina</label>
+            <input type="file" id="image" name="image">
         </div>
 
         <button type="submit">Modifica Post</button>
